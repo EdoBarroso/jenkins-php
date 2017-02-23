@@ -17,7 +17,7 @@ This will store the workspace in /var/jenkins_home. All Jenkins data lives in th
 You will probably want to make that an explicit volume so you can manage it and attach to another container for upgrades :
 
 ```
-docker run -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenkins
+docker run -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home edobarroso/jenkins-php
 ```
 
 this will automatically create a 'jenkins_home' volume on docker host, that will survive container stop/restart/deletion. 
@@ -124,7 +124,7 @@ You might need to customize the JVM running Jenkins, typically to pass system pr
 variable for this purpose :
 
 ```
-docker run --name myjenkins -p 8080:8080 -p 50000:50000 --env JAVA_OPTS=-Dhudson.footerURL=http://mycompany.com jenkins
+docker run --name myjenkins -p 8080:8080 -p 50000:50000 --env JAVA_OPTS=-Dhudson.footerURL=http://mycompany.com edobarroso/jenkins-php
 ```
 
 # Configuring logging
@@ -139,7 +139,7 @@ handlers=java.util.logging.ConsoleHandler
 jenkins.level=FINEST
 java.util.logging.ConsoleHandler.level=FINEST
 EOF
-docker run --name myjenkins -p 8080:8080 -p 50000:50000 --env JAVA_OPTS="-Djava.util.logging.config.file=/var/jenkins_home/log.properties" -v `pwd`/data:/var/jenkins_home jenkins
+docker run --name myjenkins -p 8080:8080 -p 50000:50000 --env JAVA_OPTS="-Djava.util.logging.config.file=/var/jenkins_home/log.properties" -v `pwd`/data:/var/jenkins_home edobarroso/jenkins-php
 ```
 
 # Configuring reverse proxy
